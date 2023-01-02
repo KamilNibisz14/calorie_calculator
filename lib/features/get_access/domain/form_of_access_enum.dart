@@ -1,0 +1,4 @@
+enum FormOfAccess{
+  Login,
+  Register,
+}

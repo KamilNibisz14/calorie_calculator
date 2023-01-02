@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "97810426915",
+    "project_id": "calorie-calculator-be0e4",
+    "storage_bucket": "calorie-calculator-be0e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97810426915:android:6d80a607d97bdbc3d05596",
+        "android_client_info": {
+          "package_name": "com.KamilN.calorie_calculator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97810426915-hl99ie4shujieiba4jc85o1cfjg2jcrj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKgniEsVfKbzTboJE_8r8QBSZaxTsNzOY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "97810426915-hl99ie4shujieiba4jc85o1cfjg2jcrj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
