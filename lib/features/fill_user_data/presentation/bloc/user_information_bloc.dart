@@ -67,7 +67,7 @@ class UserInformationBloc extends Bloc<UserInformationEvent, UserInformationStat
     ));
   }
   _onRemoveAgeEvent(RemoveAgeEvent event, Emitter<UserInformationState> emit){
-    if(_userData.age > 0){
+    if(_userData.age > 1){
       _userData.age--;
     }
     emit(UserInformationState(
@@ -92,7 +92,7 @@ class UserInformationBloc extends Bloc<UserInformationEvent, UserInformationStat
   }
   _onCalculateCalorie(CalculatCalorie event, Emitter<UserInformationState> emit){
     if(_userData.gender == Gender.male){
-      _calorieData.totalKcal = (66 + (13.7 * _userData.weight) + (5*_userData.height) - (6.67 * _userData.age)).ceil();
+      _calorieData.totalKcal = (66 + (13.7 * _userData.weight) + (5*_userData.height) - (6.67 * _userData.age)).ceilToDouble();
       if(_userData.goal == Goal.Gain){
         _calorieData.totalKcal += 300;
       }else if(_userData.goal == Goal.Loss){
@@ -101,7 +101,7 @@ class UserInformationBloc extends Bloc<UserInformationEvent, UserInformationStat
       _calorieData.totalKcal += 150 * _userData.daysOfExercise;
 
     }else{
-      _calorieData.totalKcal = (655 + (9.6 * _userData.weight) + (1.8*_userData.height) - (4.7 * _userData.age)).ceil();
+      _calorieData.totalKcal = (655 + (9.6 * _userData.weight) + (1.8*_userData.height) - (4.7 * _userData.age)).ceilToDouble();
       if(_userData.goal == Goal.Gain){
         _calorieData.totalKcal += 250;
       }else if(_userData.goal == Goal.Loss){
@@ -109,11 +109,11 @@ class UserInformationBloc extends Bloc<UserInformationEvent, UserInformationStat
       }
       _calorieData.totalKcal += 125 * _userData.daysOfExercise;
     }
-    _calorieData.carbohydrates = (_calorieData.totalKcal * 0.54);
-    _calorieData.protein = (_calorieData.totalKcal * 0.24);
-    _calorieData.fats = (_calorieData.totalKcal * 0.22);
-    print(_calorieData.carbohydrates);
-    print(_calorieData.protein);
-    print(_calorieData.fats);
+    _calorieData.carbohydrates = ((_calorieData.totalKcal * 0.51)/4).ceilToDouble();
+    _calorieData.protein = ((_calorieData.totalKcal * 0.25)/4).ceilToDouble();
+    _calorieData.fats = ((_calorieData.totalKcal * 0.24)/9).ceilToDouble();
+  }
+  CalorieData getCalorieDataEvent(){
+    return _calorieData;
   }
 }

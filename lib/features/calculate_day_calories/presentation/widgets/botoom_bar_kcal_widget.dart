@@ -29,7 +29,7 @@ class BottomBarKcalWidget extends StatelessWidget {
         children: [
           LinearProgressIndicator(
             value: value / maxValue,
-            color: color,
+            color: value / maxValue > 1? Colors.redAccent : color,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

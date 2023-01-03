@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/constants.dart';
+import '../../../calculate_day_calories/presentation/bloc/calculate_day_calories_bloc.dart';
+import '../../../calculate_day_calories/presentation/pages/calculate_day_calories.dart';
 
 class CalculateButton extends StatelessWidget {
   const CalculateButton({super.key});
@@ -20,12 +22,21 @@ class CalculateButton extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(right: 30),
-          child: BlocListener<UserInformationBloc, UserInformationState>(
-            listener: (context, state) {
-            },
+          child: MultiBlocListener(
+            listeners: [
+              BlocListener<UserInformationBloc, UserInformationState>(
+                listener: (context, state) {},
+              ),
+              BlocListener<CalculateDayCaloriesBloc, CalculateDayCaloriesState>(
+                listener: (context, state) {
+                },
+              ),
+            ],
             child: GestureDetector(
-              onTap: (){
+              onTap: () {
                 context.read<UserInformationBloc>().add(CalculatCalorie());
+                context.read<CalculateDayCaloriesBloc>().add(SetCalorieData(calorieData: context.read<UserInformationBloc>().getCalorieDataEvent()));
+                Navigator.pushNamed(context,CalculateDayCaloriesPage.id);
               },
               child: Container(
                 width: buttonWidth,

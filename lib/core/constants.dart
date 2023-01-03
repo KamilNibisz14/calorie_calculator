@@ -10,3 +10,12 @@ const getAccessInputDecoration = InputDecoration(
     borderSide: BorderSide(color: mainColor),
   ),
 );
+
+const fillMacroelementInputDecoration = InputDecoration(
+  enabledBorder: UnderlineInputBorder(
+    borderSide: BorderSide(color: mainColor),
+  ),
+  focusedBorder: UnderlineInputBorder(
+    borderSide: BorderSide(color: mainColor),
+  ),
+);

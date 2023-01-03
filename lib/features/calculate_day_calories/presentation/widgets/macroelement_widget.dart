@@ -1,0 +1,37 @@
+import 'package:calorie_calculator/core/entities/macroelement_enum.dart';
+import 'package:flutter/material.dart';
+
+class MacroelementViewWidget extends StatelessWidget {
+  MacroelementViewWidget({
+    required this.title,
+    required this.value,
+    super.key
+  });
+  String title;
+  double value;
+
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth / 25;
+    return Column(
+      children: [
+        Text(
+          "$title: ",
+          style: TextStyle(
+            fontSize: fontSize
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 10),
+          child: Text(
+            value.toString(),
+            style: TextStyle(
+              fontSize: fontSize
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}

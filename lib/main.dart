@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'features/calculate_day_calories/presentation/bloc/calculate_day_calories_bloc.dart';
 import 'features/calculate_day_calories/presentation/pages/calculate_day_calories.dart';
 import 'features/fill_user_data/presentation/bloc/user_information_bloc.dart';
 import 'features/get_access/presentation/bloc/get_access_bloc.dart';
@@ -23,6 +24,9 @@ void main() async {
       BlocProvider<GetAccessBloc>(
         create: (context) => GetAccessBloc(),
       ),
+      BlocProvider<CalculateDayCaloriesBloc>(
+        create: (context) => CalculateDayCaloriesBloc(),
+      ),
     ],
     child: const MyApp(),
   ));
@@ -40,7 +44,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      initialRoute: CalculateDayCaloriesPage.id,
+      initialRoute: FillUserDataPage.id,
       routes: {
         FillUserDataPage.id: (context) => const FillUserDataPage(),
         GetAccessPage.id: (context) => const GetAccessPage(),

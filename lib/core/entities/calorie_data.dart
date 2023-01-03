@@ -1,5 +1,5 @@
 class CalorieData{
-  int totalKcal;
+  double totalKcal;
   double protein;
   double carbohydrates;
   double fats;
@@ -10,4 +10,11 @@ class CalorieData{
     this.fats = 0,
     this.totalKcal = 0,
   });
+
+  void addValue(CalorieData calorieData){
+    totalKcal += calorieData.totalKcal;
+    protein += calorieData.protein;
+    fats += calorieData.fats;
+    carbohydrates += calorieData.carbohydrates;
+  }
 }
