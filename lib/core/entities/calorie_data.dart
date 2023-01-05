@@ -17,4 +17,10 @@ class CalorieData{
     fats += calorieData.fats;
     carbohydrates += calorieData.carbohydrates;
   }
+  void subtractionValue(CalorieData calorieData){
+    totalKcal -= calorieData.totalKcal;
+    protein -= calorieData.protein;
+    fats -= calorieData.fats;
+    carbohydrates -= calorieData.carbohydrates;
+  }
 }

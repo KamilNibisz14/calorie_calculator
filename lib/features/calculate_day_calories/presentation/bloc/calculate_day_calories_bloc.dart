@@ -22,6 +22,7 @@ class CalculateDayCaloriesBloc extends Bloc<CalculateDayCaloriesEvent, Calculate
     on<AddCarbohydretsInMeal>(_onAddCarbohydretsInMeal);
     on<AddFatsInMeal>(_onAddFatsInMeal);
     on<AddProteinInMeal>(_onAddProteinInMeal);
+    on<RemoveMealEvent>(_onRemoveMealEvent);
   }
   _onSetCalorieData(SetCalorieData event, Emitter<CalculateDayCaloriesState> emit){
     _calorieData = event.calorieData;
@@ -38,9 +39,6 @@ class CalculateDayCaloriesBloc extends Bloc<CalculateDayCaloriesEvent, Calculate
       _fillCalorieData.totalKcal = ((_fillCalorieData.carbohydrates * 4) + (_fillCalorieData.protein * 4) + (_fillCalorieData.fats * 9));
       _meals.add(_fillCalorieData);
       _caloriesThroughoutTheDay.addValue(_fillCalorieData);
-      print(_caloriesThroughoutTheDay.carbohydrates);
-      print(_caloriesThroughoutTheDay.protein);
-      print(_caloriesThroughoutTheDay.fats);
       _fillCalorieData = CalorieData();
       emit(FillCalculateDayCaloriesState(calorieData: _calorieData, meals: _meals, caloriesThroughoutTheDay: _caloriesThroughoutTheDay));
     }
@@ -54,4 +52,10 @@ class CalculateDayCaloriesBloc extends Bloc<CalculateDayCaloriesEvent, Calculate
   _onAddProteinInMeal(AddProteinInMeal event, Emitter<CalculateDayCaloriesState> emit){
     _fillCalorieData.protein = event.protein;
   }
+  _onRemoveMealEvent(RemoveMealEvent event, Emitter<CalculateDayCaloriesState> emit){
+    _caloriesThroughoutTheDay.subtractionValue(_meals[event.index]);
+    _meals.removeAt(event.index);
+    emit(FillCalculateDayCaloriesState(calorieData: _calorieData, meals: _meals, caloriesThroughoutTheDay: _caloriesThroughoutTheDay));
+  }
+
 }

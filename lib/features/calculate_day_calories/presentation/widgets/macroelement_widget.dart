@@ -1,6 +1,6 @@
-import 'package:calorie_calculator/core/entities/macroelement_enum.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class MacroelementViewWidget extends StatelessWidget {
   MacroelementViewWidget({
     required this.title,

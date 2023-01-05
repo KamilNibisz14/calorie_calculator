@@ -51,3 +51,13 @@ class AddCarbohydretsInMeal extends CalculateDayCaloriesEvent{
   @override
   List<Object> get props => [carbohydrates];
 }
+
+// ignore: must_be_immutable
+class RemoveMealEvent extends CalculateDayCaloriesEvent{
+  int index;
+  RemoveMealEvent({
+    required this.index
+  });
+  @override
+  List<Object> get props => [index];
+}

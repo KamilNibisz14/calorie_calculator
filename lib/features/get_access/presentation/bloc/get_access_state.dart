@@ -16,4 +16,11 @@ class GetAccessInProgressState extends GetAccessState {
   List<Object> get props => [formOfAccess];
 }
 class GetAccessErrorState extends GetAccessState {}
-class GetAccessValidState extends GetAccessState {}
+class GetAccessValidState extends GetAccessState {
+  FormOfAccess formOfAccess;
+  GetAccessValidState({
+    required this.formOfAccess
+  });
+  @override
+  List<Object> get props => [formOfAccess];
+}

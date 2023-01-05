@@ -8,7 +8,7 @@ class AddMealButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    void _addMeal(BuildContext context){
+    void addMeal(BuildContext context){
     showModalBottomSheet(
         context: context,
         builder: (context) => SingleChildScrollView(
@@ -16,7 +16,7 @@ class AddMealButton extends StatelessWidget {
             padding: EdgeInsets.only(
               bottom: MediaQuery.of(context).viewInsets.bottom,
             ),
-            child: AddMeal()
+            child: const AddMeal()
           ),
         )
       );
@@ -28,7 +28,7 @@ class AddMealButton extends StatelessWidget {
     double borderRadius = screenWidth / 20;
     double fontSize = screenWidth / 25;
     return GestureDetector(
-      onTap:() => _addMeal(context),
+      onTap:() => addMeal(context),
       child: Container(
         width: buttonWidth,
         height: buttonHeight,

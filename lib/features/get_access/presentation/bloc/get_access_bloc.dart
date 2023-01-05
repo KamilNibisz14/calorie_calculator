@@ -46,7 +46,7 @@ class GetAccessBloc extends Bloc<GetAccessEvent, GetAccessState> {
       isLogged = await locator.get<RegisterUser>().registerUser(_userData);
     }
     if(isLogged){
-      emit(GetAccessValidState());
+      emit(GetAccessValidState(formOfAccess: _formOfAccess));
     }
     else{
       emit(GetAccessErrorState());

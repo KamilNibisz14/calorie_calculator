@@ -34,12 +34,14 @@ class FillMacroelement extends StatelessWidget {
                 validator: FormBuilderValidators.compose(
                     [FormBuilderValidators.numeric(errorText: 'Invalid')]),
                 onChanged: (value) {
-                  if (macroelement == Macroelement.carbohydrates) {
-                    context.read<CalculateDayCaloriesBloc>().add(AddCarbohydretsInMeal(carbohydrates: double.parse(value)));
-                  } else if (macroelement == Macroelement.fats) {
-                    context.read<CalculateDayCaloriesBloc>().add(AddFatsInMeal(fats: double.parse(value)));
-                  } else if (macroelement == Macroelement.protein) {
-                    context.read<CalculateDayCaloriesBloc>().add(AddProteinInMeal(protein: double.parse(value)));
+                  if(double.tryParse(value)!= null && value !='0'){
+                    if (macroelement == Macroelement.carbohydrates) {
+                      context.read<CalculateDayCaloriesBloc>().add(AddCarbohydretsInMeal(carbohydrates: double.parse(value)));
+                    } else if (macroelement == Macroelement.fats) {
+                      context.read<CalculateDayCaloriesBloc>().add(AddFatsInMeal(fats: double.parse(value)));
+                    } else if (macroelement == Macroelement.protein) {
+                      context.read<CalculateDayCaloriesBloc>().add(AddProteinInMeal(protein: double.parse(value)));
+                    }
                   }
                 },
               ))

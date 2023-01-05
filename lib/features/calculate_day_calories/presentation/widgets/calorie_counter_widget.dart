@@ -15,7 +15,7 @@ class CalorieCounterWidget extends StatelessWidget {
     return Container(
       height: heightOfBottonBar,
       width: double.infinity,
-      color: Colors.black12,
+      color: bottomBarColor,
       child: BlocBuilder<CalculateDayCaloriesBloc, CalculateDayCaloriesState>(
         builder: (context, state) {
           return Row(

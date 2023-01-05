@@ -15,6 +15,9 @@ class MealInDays extends StatelessWidget {
     double mealsWidgetWidth = screenWidth;
     double titleFontSize = screenWidth / 20;
     double mealContainerHeight = screenWidth /3;
+    double heightOfBottonBar = screenWidth / 6;
+    double iconSize = screenWidth / 18;
+
 
     List<Container> getMeals(List<CalorieData> meals){
       List<Container> listOfMeals = [];
@@ -22,8 +25,12 @@ class MealInDays extends StatelessWidget {
       for(int i = 0; i < meals.length; ++i){
         listOfMeals.add(
           Container(
-            //color: Colors.black12,
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(width: 1,color: Colors.white54)
+              )
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             width: mealsWidgetWidth,
             height: mealContainerHeight,
             child: Column(
@@ -31,11 +38,26 @@ class MealInDays extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(bottom: 20),
-                  child: Text(
-                    "Meal ${i+1}: ",
-                    style: TextStyle(
-                      fontSize: titleFontSize,
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Meal ${i+1}: ",
+                        style: TextStyle(
+                          fontSize: titleFontSize,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: (){
+                          context.read<CalculateDayCaloriesBloc>().add(RemoveMealEvent(index: i));
+                        },
+                        child: Icon(
+                          Icons.cancel_rounded,
+                          color: Colors.redAccent,
+                          size: iconSize,
+                        ),
+                      )
+                    ],
                   ),
                 ),
                 Expanded(
@@ -57,21 +79,24 @@ class MealInDays extends StatelessWidget {
       return listOfMeals;
     }
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        BlocBuilder<CalculateDayCaloriesBloc, CalculateDayCaloriesState>(
-          builder: (context, state) {
-            return Column(
-              children: getMeals(state.meals),
-            );
-          },
-        ),
-        const Padding(
-          padding: EdgeInsets.only(top: 25),
-          child: AddMealButton(),
-        )
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          BlocBuilder<CalculateDayCaloriesBloc, CalculateDayCaloriesState>(
+            builder: (context, state) {
+              return Column(
+                children: getMeals(state.meals),
+              );
+            },
+          ),
+          const Padding(
+            padding: EdgeInsets.only(top: 25),
+            child: AddMealButton(),
+          ),
+          SizedBox(height: heightOfBottonBar)
+        ],
+      ),
     );
   }
 }

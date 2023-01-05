@@ -1,5 +1,5 @@
-import 'package:calorie_calculator/core/constants.dart';
 import 'package:calorie_calculator/features/fill_user_data/presentation/pages/fill_user_data_page.dart';
+import 'package:calorie_calculator/features/menu/presentation/pages/main_menu_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +10,7 @@ import 'features/calculate_day_calories/presentation/pages/calculate_day_calorie
 import 'features/fill_user_data/presentation/bloc/user_information_bloc.dart';
 import 'features/get_access/presentation/bloc/get_access_bloc.dart';
 import 'features/get_access/presentation/pages/get_access_page.dart';
+import 'features/menu/presentation/pages/about.dart';
 import 'locator.dart';
 
 void main() async {
@@ -31,7 +32,7 @@ void main() async {
     child: const MyApp(),
   ));
 }
-
+ 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -46,9 +47,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark(),
       initialRoute: FillUserDataPage.id,
       routes: {
+        MainMenuPage.id: (context) => const MainMenuPage(),
         FillUserDataPage.id: (context) => const FillUserDataPage(),
         GetAccessPage.id: (context) => const GetAccessPage(),
         CalculateDayCaloriesPage.id : (context) => const CalculateDayCaloriesPage(),
+        AboutPage.id : (context) => const AboutPage()
       },
     );
   }

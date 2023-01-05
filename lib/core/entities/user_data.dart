@@ -1,4 +1,3 @@
-import 'package:calorie_calculator/core/entities/calorie_data.dart';
 import 'package:calorie_calculator/core/entities/gender_enum.dart';
 import 'package:calorie_calculator/core/entities/goal_enum.dart';
 
