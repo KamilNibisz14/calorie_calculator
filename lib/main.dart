@@ -1,5 +1,6 @@
 import 'package:calorie_calculator/features/fill_user_data/presentation/pages/fill_user_data_page.dart';
 import 'package:calorie_calculator/features/menu/presentation/pages/main_menu_page.dart';
+import 'package:calorie_calculator/features/summary/presentation/pages/summary_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -51,7 +52,8 @@ class MyApp extends StatelessWidget {
         FillUserDataPage.id: (context) => const FillUserDataPage(),
         GetAccessPage.id: (context) => const GetAccessPage(),
         CalculateDayCaloriesPage.id : (context) => const CalculateDayCaloriesPage(),
-        AboutPage.id : (context) => const AboutPage()
+        AboutPage.id : (context) => const AboutPage(),
+        SummaryPage.id : (context) => const SummaryPage()
       },
     );
   }

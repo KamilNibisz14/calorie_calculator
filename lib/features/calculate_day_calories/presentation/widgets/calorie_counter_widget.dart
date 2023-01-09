@@ -34,7 +34,7 @@ class CalorieCounterWidget extends StatelessWidget {
                 unit: "g",
                 value: state.caloriesThroughoutTheDay.protein,
                 maxValue: state.calorieData.protein,
-                color: Colors.lightBlue,
+                color: proteinColor,
               )),
               Expanded(
                   child: BottomBarKcalWidget(
@@ -42,7 +42,7 @@ class CalorieCounterWidget extends StatelessWidget {
                 unit: "g",
                 value: state.caloriesThroughoutTheDay.fats,
                 maxValue: state.calorieData.fats,
-                color: Colors.amberAccent,
+                color: fatsColor,
               )),
               Expanded(
                   child: BottomBarKcalWidget(
@@ -50,7 +50,7 @@ class CalorieCounterWidget extends StatelessWidget {
                 unit: "g",
                 value: state.caloriesThroughoutTheDay.carbohydrates,
                 maxValue: state.calorieData.carbohydrates,
-                color: Colors.purple,
+                color: carbohydratesColor,
               )),
             ],
           );

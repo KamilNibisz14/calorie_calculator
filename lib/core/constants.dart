@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 const Color mainColor = Color.fromARGB(255, 50, 80, 200);
 const bottomBarColor = Color(0xFF2A2A2A);
 const menuIconColor = Color(0xFFE1E1E1);
+const proteinColor = Colors.lightBlue;
+const fatsColor = Colors.amberAccent;
+const carbohydratesColor = Colors.purple;
+
 
 const getAccessInputDecoration = InputDecoration(
   enabledBorder: UnderlineInputBorder(
