@@ -1,4 +1,4 @@
-import 'package:calorie_calculator/features/get_access/domain/form_of_access_enum.dart';
+import 'package:calorie_calculator/features/get_access/domain/entities/form_of_access_enum.dart';
 import 'package:calorie_calculator/features/get_access/presentation/bloc/get_access_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,4 +1,4 @@
-import 'package:calorie_calculator/features/get_access/domain/form_of_access_enum.dart';
+import 'package:calorie_calculator/features/get_access/domain/entities/form_of_access_enum.dart';
 import 'package:calorie_calculator/features/get_access/presentation/bloc/get_access_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,31 +16,40 @@ class GetAccessPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<GetAccessBloc, GetAccessState>(
       listener: (context, state) {
-        if(state is GetAccessValidState){
-          if(state.formOfAccess == FormOfAccess.Register){
+        if (state is GetAccessValidState) {
+          if (state.formOfAccess == FormOfAccess.Register) {
             Navigator.pushNamed(context, FillUserDataPage.id);
-          }
-          else{
-            Navigator.pushNamed(context, CalculateDayCaloriesPage.id);
+          } else {
+            Navigator.pushNamed(context, FillUserDataPage.id);
           }
         }
       },
       child: Scaffold(
-        body: SafeArea(
-          child: Stack(
-            children: const [
-              Align(
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 50.0),
-                    child: GetAccessForm(),
-                  )),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: GetAccessButton(),
-              )
-            ],
-          ),
+        body: BlocBuilder<GetAccessBloc, GetAccessState>(
+          builder: (context, state) {
+            if(state is GetAccessInitialState){
+              context.read<GetAccessBloc>().add(GetDataFromStorageEvent());
+              return const Center(child: CircularProgressIndicator());
+            }
+            else{
+              return SafeArea(
+                child: Stack(
+                  children: const [
+                    Align(
+                        alignment: Alignment.center,
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: 50.0),
+                          child: GetAccessForm(),
+                        )),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: GetAccessButton(),
+                    )
+                  ],
+                ),
+              );
+            }
+          },
         ),
       ),
     );

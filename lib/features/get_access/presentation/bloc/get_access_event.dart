@@ -24,7 +24,10 @@ class GetPassword extends GetAccessEvent{
   @override
   List<Object> get props => [password];
 }
+class GetDataFromStorageEvent extends GetAccessEvent{}
 
 class ChangeFormOfAccess extends GetAccessEvent{}
 
 class GetAccess extends GetAccessEvent{}
+
+class LogOutEvent extends GetAccessEvent{}

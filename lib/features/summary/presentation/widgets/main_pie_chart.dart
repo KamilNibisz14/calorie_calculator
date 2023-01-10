@@ -31,7 +31,7 @@ class MainPieChart extends StatelessWidget {
       carbohydratesColor,
     ];
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 75),
+      margin: const EdgeInsets.only(top: 50, bottom: 30),
       child: PieChart(
         dataMap: dataMap,
         chartType: ChartType.disc,

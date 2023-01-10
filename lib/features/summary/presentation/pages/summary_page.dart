@@ -12,6 +12,20 @@ class SummaryPage extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double fontSize = screenWidth / 20;
     return Scaffold(
+      appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () => Navigator.pop(context),
+          child: const Icon(
+            Icons.arrow_back
+          ),
+        ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text("Summary"),
+          ],
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(15),
@@ -29,15 +43,20 @@ class SummaryPage extends StatelessWidget {
                 proteinValue: 5,
                 fatsValue: 5,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DayDataWidget(
-                    proteinValue: 5,
-                    fatsValue: 5,
-                    carbohydratesValue: 5,
-                  )
-                ],
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      DayDataWidget(
+                        proteinValue: 100,
+                        fatsValue: 100,
+                        carbohydratesValue: 500,
+                        date: DateTime.now().toString().substring(0,10),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),

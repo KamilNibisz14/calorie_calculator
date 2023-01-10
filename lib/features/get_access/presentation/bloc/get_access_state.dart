@@ -7,6 +7,7 @@ abstract class GetAccessState {
 }
 
 // ignore: must_be_immutable
+class GetAccessInitialState extends GetAccessState{}
 class GetAccessInProgressState extends GetAccessState {
   FormOfAccess formOfAccess;
   GetAccessInProgressState({

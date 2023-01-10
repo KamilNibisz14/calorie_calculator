@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:calorie_calculator/features/fill_user_data/presentation/pages/fill_user_data_page.dart';
 import 'package:calorie_calculator/features/menu/presentation/pages/main_menu_page.dart';
 import 'package:calorie_calculator/features/summary/presentation/pages/summary_page.dart';
@@ -5,6 +7,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'features/calculate_day_calories/presentation/bloc/calculate_day_calories_bloc.dart';
 import 'features/calculate_day_calories/presentation/pages/calculate_day_calories.dart';
@@ -16,6 +21,9 @@ import 'locator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final appDocumentDirectory = await getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDirectory.path);
+  var openBox = await Hive.openBox('UserAccessData');
   await Firebase.initializeApp();
   setup();
   runApp(MultiBlocProvider(
@@ -46,7 +54,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      initialRoute: FillUserDataPage.id,
+      initialRoute: GetAccessPage.id,
       routes: {
         MainMenuPage.id: (context) => const MainMenuPage(),
         FillUserDataPage.id: (context) => const FillUserDataPage(),

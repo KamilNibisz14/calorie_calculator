@@ -1,7 +1,11 @@
 import 'package:calorie_calculator/features/menu/presentation/pages/about.dart';
+import 'package:calorie_calculator/features/summary/presentation/pages/summary_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../fill_user_data/presentation/pages/fill_user_data_page.dart';
+import '../../../get_access/presentation/bloc/get_access_bloc.dart';
+import '../../../get_access/presentation/pages/get_access_page.dart';
 import '../widgets/menu_card.dart';
 
 
@@ -21,7 +25,7 @@ class MainMenuPage extends StatelessWidget {
         ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: [
+          children: const[
             Text("Main Menu"),
           ],
         ),
@@ -32,12 +36,7 @@ class MainMenuPage extends StatelessWidget {
           MenuCard(
             iconData: Icons.book, 
             title: "Summary",
-            onTap: (){},
-          ),
-          MenuCard(
-            iconData: Icons.boy_rounded, 
-            title: "Body measurements",
-            onTap: (){},
+            onTap: () => Navigator.pushNamed(context, SummaryPage.id),
           ),
           MenuCard(
             iconData: Icons.person, 
@@ -48,6 +47,14 @@ class MainMenuPage extends StatelessWidget {
             iconData: Icons.info_outline, 
             title: "About",
             onTap: () => Navigator.pushNamed(context, AboutPage.id),
+          ),
+            MenuCard(
+            iconData: Icons.logout, 
+            title: "Log out",
+            onTap: (){
+              context.read<GetAccessBloc>().add(LogOutEvent());
+              Navigator.pushNamed(context, GetAccessPage.id);
+            },
           ),
         ],
       ),

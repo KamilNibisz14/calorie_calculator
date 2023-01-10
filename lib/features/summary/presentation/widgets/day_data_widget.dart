@@ -1,4 +1,7 @@
+import 'package:calorie_calculator/core/constants.dart';
+import 'package:calorie_calculator/features/summary/presentation/widgets/popUp_day_calorie_data.dart';
 import 'package:flutter/material.dart';
+import 'package:popup_card/popup_card.dart';
 
 import 'day_data_pie_chart.dart';
 
@@ -7,11 +10,13 @@ class DayDataWidget extends StatelessWidget {
     required this.carbohydratesValue,
     required this.fatsValue,
     required this.proteinValue,
+    required this.date,
     super.key
   });
   double proteinValue;
   double fatsValue;
   double carbohydratesValue;
+  String date;
 
   @override
   Widget build(BuildContext context) {
@@ -22,34 +27,60 @@ class DayDataWidget extends StatelessWidget {
 
     int kcal = (4 *carbohydratesValue + 4 * proteinValue + 9 * fatsValue).ceil();  
 
-    return Container(
-      padding: EdgeInsets.only(bottom: 20),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(width: 1, color: Colors.white70)
+    return PopupItemLauncher(
+      tag: "1",
+       popUp: PopUpItem(
+        padding: const EdgeInsets.all(10),
+        color: bottomBarColor, 
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)), 
+        elevation: 2,
+        tag: '2', 
+        child: PopUpDayCalorieData(
+          carbohydratesValue: carbohydratesValue,
+          proteinValue: proteinValue,
+          fatsValue: fatsValue,
+          date: date,
         )
       ),
-      height: dayDataHeight,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children:[
-          Expanded(
-            child: Text(
-              "Kcal:  $kcal",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: fontSize
-              ),
-            )
-          ),
-          Expanded(
-            child: DayDataPieChart(
-              proteinValue: proteinValue,
-              fatsValue: fatsValue,
-              carbohydratesValue: carbohydratesValue,
-            )
+      child: Container(
+        padding: const EdgeInsets.only(bottom: 20),
+        margin: const EdgeInsets.only(top: 20),
+        decoration: const BoxDecoration(
+          border: Border(
+            bottom: BorderSide(width: 1, color: Colors.white70)
           )
-        ]
+        ),
+        height: dayDataHeight,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children:[
+            Expanded(
+              child: Text(
+                date,
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontSize: fontSize
+                ),
+              )
+            ),
+            Expanded(
+              child: Text(
+                "Kcal:  $kcal",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: fontSize
+                ),
+              )
+            ),
+            Expanded(
+              child: DayDataPieChart(
+                proteinValue: proteinValue,
+                fatsValue: fatsValue,
+                carbohydratesValue: carbohydratesValue,
+              )
+            )
+          ]
+        ),
       ),
     );
   }

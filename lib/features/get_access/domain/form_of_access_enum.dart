@@ -1,4 +1,0 @@
-enum FormOfAccess{
-  Login,
-  Register,
-}
