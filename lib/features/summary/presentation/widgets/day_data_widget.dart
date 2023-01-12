@@ -5,6 +5,7 @@ import 'package:popup_card/popup_card.dart';
 
 import 'day_data_pie_chart.dart';
 
+// ignore: must_be_immutable
 class DayDataWidget extends StatelessWidget {
   DayDataWidget({
     required this.carbohydratesValue,
@@ -28,13 +29,13 @@ class DayDataWidget extends StatelessWidget {
     int kcal = (4 *carbohydratesValue + 4 * proteinValue + 9 * fatsValue).ceil();  
 
     return PopupItemLauncher(
-      tag: "1",
+      tag: (date + carbohydratesValue.toString()),
        popUp: PopUpItem(
         padding: const EdgeInsets.all(10),
         color: bottomBarColor, 
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)), 
         elevation: 2,
-        tag: '2', 
+        tag: (date + proteinValue.toString()), 
         child: PopUpDayCalorieData(
           carbohydratesValue: carbohydratesValue,
           proteinValue: proteinValue,

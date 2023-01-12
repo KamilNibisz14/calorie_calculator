@@ -22,12 +22,14 @@ class GetCalorieDataFromStorage extends CalculateDayCaloriesEvent{
 // ignore: must_be_immutable
 class SetCalorieData extends CalculateDayCaloriesEvent{
   CalorieData calorieData;
+  String email;
   SetCalorieData({
-    required this.calorieData
+    required this.calorieData,
+    required this.email,
   });
 
   @override
-  List<Object> get props => [calorieData];
+  List<Object> get props => [calorieData,email];
 }
 
 class CancelAddMealEvent extends CalculateDayCaloriesEvent{}

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/constants.dart';
-import '../../../fill_user_data/presentation/pages/fill_user_data_page.dart';
 import '../bloc/calculate_day_calories_bloc.dart';
 import '../widgets/calorie_counter_widget.dart';
 import '../widgets/go_back_to_user_data_page_button.dart';
@@ -42,7 +41,7 @@ class CalculateDayCaloriesPage extends StatelessWidget {
                         fontSize: errorTextFontSize
                       ),
                     ),
-                    BackUserButtonButton()
+                    const BackUserButtonButton()
                   ],
                 ),
               );

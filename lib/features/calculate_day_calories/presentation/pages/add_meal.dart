@@ -1,4 +1,3 @@
-import 'package:calorie_calculator/core/constants.dart';
 import 'package:calorie_calculator/core/entities/macroelement_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:calorie_calculator/features/get_access/data/check_if_user_is_correct.dart';
 import 'package:calorie_calculator/features/get_access/data/register_new_user.dart';
@@ -68,8 +66,8 @@ class GetAccessBloc extends Bloc<GetAccessEvent, GetAccessState> {
    }
   }
   _onLogOutEvent(LogOutEvent event, Emitter<GetAccessState> emit){
-    _userData.email = null;
-    _userData.password = null;
+    _userData.email = '';
+    _userData.password = '';
     _formOfAccess = FormOfAccess.Login;
     locator.get<UserAccessDataStorage>().logout();
     emit(GetAccessInProgressState(

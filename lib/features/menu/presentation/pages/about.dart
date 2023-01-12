@@ -19,7 +19,7 @@ class AboutPage extends StatelessWidget {
         ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: [
+          children: const [
             Text("About"),
           ],
         ),

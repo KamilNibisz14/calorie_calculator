@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:calorie_calculator/features/fill_user_data/presentation/pages/fill_user_data_page.dart';
 import 'package:calorie_calculator/features/menu/presentation/pages/main_menu_page.dart';
 import 'package:calorie_calculator/features/summary/presentation/pages/summary_page.dart';
@@ -17,6 +15,7 @@ import 'features/fill_user_data/presentation/bloc/user_information_bloc.dart';
 import 'features/get_access/presentation/bloc/get_access_bloc.dart';
 import 'features/get_access/presentation/pages/get_access_page.dart';
 import 'features/menu/presentation/pages/about.dart';
+import 'features/summary/presentation/bloc/summary_bloc.dart';
 import 'locator.dart';
 
 void main() async {
@@ -36,6 +35,9 @@ void main() async {
       ),
       BlocProvider<CalculateDayCaloriesBloc>(
         create: (context) => CalculateDayCaloriesBloc(),
+      ),
+      BlocProvider<SummaryBloc>(
+        create: (context) => SummaryBloc(),
       ),
     ],
     child: const MyApp(),

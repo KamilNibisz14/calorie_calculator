@@ -23,7 +23,7 @@ class PopUpDayCalorieData extends StatelessWidget {
     double fontSize = screenWidth / 24;
     int kcal = (4 *carbohydratesValue + 4 * proteinValue + 9 * fatsValue).ceil();  
     return Container(
-      margin: EdgeInsets.only(top: 25),
+      margin: const EdgeInsets.only(top: 25),
       child: Column(
         children: [
            Row(

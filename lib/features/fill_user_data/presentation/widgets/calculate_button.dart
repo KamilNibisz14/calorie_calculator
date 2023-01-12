@@ -36,7 +36,7 @@ class CalculateButton extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 context.read<UserInformationBloc>().add(CalculatCalorie(email: context.read<GetAccessBloc>().getEmail()));
-                context.read<CalculateDayCaloriesBloc>().add(SetCalorieData(calorieData: context.read<UserInformationBloc>().getCalorieDataEvent()));
+                context.read<CalculateDayCaloriesBloc>().add(SetCalorieData(calorieData: context.read<UserInformationBloc>().getCalorieDataEvent(), email: context.read<GetAccessBloc>().getEmail()));
                 Navigator.pushNamed(context,CalculateDayCaloriesPage.id);
               },
               child: Container(

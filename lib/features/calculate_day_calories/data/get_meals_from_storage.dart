@@ -1,7 +1,9 @@
 
+import 'package:calorie_calculator/features/calculate_day_calories/data/save_data_in_history.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../core/entities/calorie_data.dart';
+import '../../../locator.dart';
 
 class GetMelasFromStorage{
   late String _date;
@@ -26,7 +28,24 @@ class GetMelasFromStorage{
     var value = await document.get();
     _date = value['date'];
     _convertedMeals = _convertData(List<String>.from(value['meals'] as List));
+    _checkIfDayIsPresent(email);
+
   }
+
+  void _checkIfDayIsPresent(String email){
+    if(_date != DateTime.now().toString().substring(0,10)){
+      if(_convertedMeals.isNotEmpty){
+        locator.get<SaveDataInHistory>().saveDataInHistory(_date, _convertedMeals, email);
+      }
+      _convertedMeals = [];
+      _deleteDocument(email);
+    }
+  }
+  void _deleteDocument(String email){
+    var document = FirebaseFirestore.instance.collection('meals');
+    document.doc(email).delete();
+  }
+
   List<CalorieData> _convertData(List<String> meals){
     List<CalorieData> convertedMeals = [];
     for(int i = 0; i < meals.length; ++i){

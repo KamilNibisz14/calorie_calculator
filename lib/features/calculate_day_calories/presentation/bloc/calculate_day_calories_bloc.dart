@@ -48,6 +48,7 @@ class CalculateDayCaloriesBloc extends Bloc<CalculateDayCaloriesEvent, Calculate
   }
 
   _onSetCalorieData(SetCalorieData event, Emitter<CalculateDayCaloriesState> emit){
+    email = event.email;
     _calorieData = event.calorieData;
     emit(FillCalculateDayCaloriesState(calorieData: _calorieData, meals: _meals, caloriesThroughoutTheDay: _caloriesThroughoutTheDay));
   }
