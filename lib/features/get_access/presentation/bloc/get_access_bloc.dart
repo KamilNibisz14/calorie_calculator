@@ -90,5 +90,8 @@ class GetAccessBloc extends Bloc<GetAccessEvent, GetAccessState> {
     }
     return isLogged;
   }
+  String getEmail(){
+    return _userData.email!;
+  }
 
 }

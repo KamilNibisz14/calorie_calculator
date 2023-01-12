@@ -2,6 +2,9 @@ import 'package:bloc/bloc.dart';
 import 'package:calorie_calculator/core/entities/calorie_data.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../../../locator.dart';
+import '../../data/get_calorie_data_from_storage.dart';
+
 part 'calculate_day_calories_event.dart';
 part 'calculate_day_calories_state.dart';
 
@@ -16,6 +19,7 @@ class CalculateDayCaloriesBloc extends Bloc<CalculateDayCaloriesEvent, Calculate
   CalculateDayCaloriesBloc() : super(CalculateDayCaloriesInitial(calorieData: CalorieData(), meals: [], caloriesThroughoutTheDay: CalorieData())) {
     on<CalculateDayCaloriesEvent>((event, emit) {
     });
+    on<GetCalorieDataFromStorage>(_onGetCalorieDataFromStorage);
     on<SetCalorieData>(_onSetCalorieData);
     on<CancelAddMealEvent>(_onCancelAddMealEvent);
     on<AddMealEvent>(_onAddMealEvent);
@@ -24,6 +28,16 @@ class CalculateDayCaloriesBloc extends Bloc<CalculateDayCaloriesEvent, Calculate
     on<AddProteinInMeal>(_onAddProteinInMeal);
     on<RemoveMealEvent>(_onRemoveMealEvent);
   }
+
+  _onGetCalorieDataFromStorage(GetCalorieDataFromStorage event, Emitter<CalculateDayCaloriesState> emit)async{
+    if(await  locator.get<GetCalorieData>().checkIfUserCalorieDataExist(event.email)){
+      _calorieData = await locator.get<GetCalorieData>().getCalorieData(event.email);
+      emit(FillCalculateDayCaloriesState(calorieData: _calorieData, meals: _meals, caloriesThroughoutTheDay: _caloriesThroughoutTheDay));
+    }else{
+      emit(FailToGetDataFromStorage(calorieData: _calorieData, meals: _meals, caloriesThroughoutTheDay: _caloriesThroughoutTheDay));
+    }
+  }
+
   _onSetCalorieData(SetCalorieData event, Emitter<CalculateDayCaloriesState> emit){
     _calorieData = event.calorieData;
     emit(FillCalculateDayCaloriesState(calorieData: _calorieData, meals: _meals, caloriesThroughoutTheDay: _caloriesThroughoutTheDay));

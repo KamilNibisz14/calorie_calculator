@@ -8,6 +8,16 @@ abstract class UserInformationEvent extends Equatable {
 }
 
 // ignore: must_be_immutable
+class GetDataFromStorage extends UserInformationEvent{
+  String email;
+  GetDataFromStorage({
+    required this.email
+  });
+  @override
+  List<Object> get props => [email];
+}
+
+// ignore: must_be_immutable
 class GenderChoiceEvent extends UserInformationEvent{
   Gender gender;
   GenderChoiceEvent({
@@ -49,4 +59,12 @@ class AddAgeEvent extends UserInformationEvent{}
 class RemoveAgeEvent extends UserInformationEvent{}
 class AddDaysEvent extends UserInformationEvent{}
 class RemoveDaysEvent extends UserInformationEvent{}
-class CalculatCalorie extends UserInformationEvent{}
+// ignore: must_be_immutable
+class CalculatCalorie extends UserInformationEvent{
+  String email;
+  CalculatCalorie({
+    required this.email
+  });
+  @override
+  List<Object> get props => [email];
+}

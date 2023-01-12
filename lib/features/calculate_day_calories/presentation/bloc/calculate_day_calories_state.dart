@@ -37,3 +37,13 @@ class FillCalculateDayCaloriesState extends CalculateDayCaloriesState{
   List<Object> get props => [calorieData, meals];
 }
 
+class FailToGetDataFromStorage extends CalculateDayCaloriesState{
+  FailToGetDataFromStorage({
+    required super.calorieData, 
+    required super.meals,
+    required super.caloriesThroughoutTheDay
+  });
+
+  @override
+  List<Object> get props => [calorieData, meals];
+}

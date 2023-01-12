@@ -1,4 +1,5 @@
 import 'package:calorie_calculator/features/fill_user_data/presentation/bloc/user_information_bloc.dart';
+import 'package:calorie_calculator/features/get_access/presentation/bloc/get_access_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,7 +35,7 @@ class CalculateButton extends StatelessWidget {
             ],
             child: GestureDetector(
               onTap: () {
-                context.read<UserInformationBloc>().add(CalculatCalorie());
+                context.read<UserInformationBloc>().add(CalculatCalorie(email: context.read<GetAccessBloc>().getEmail()));
                 context.read<CalculateDayCaloriesBloc>().add(SetCalorieData(calorieData: context.read<UserInformationBloc>().getCalorieDataEvent()));
                 Navigator.pushNamed(context,CalculateDayCaloriesPage.id);
               },

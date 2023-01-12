@@ -20,7 +20,7 @@ class GetAccessPage extends StatelessWidget {
           if (state.formOfAccess == FormOfAccess.Register) {
             Navigator.pushNamed(context, FillUserDataPage.id);
           } else {
-            Navigator.pushNamed(context, FillUserDataPage.id);
+            Navigator.pushNamed(context, CalculateDayCaloriesPage.id);
           }
         }
       },
@@ -29,6 +29,9 @@ class GetAccessPage extends StatelessWidget {
           builder: (context, state) {
             if(state is GetAccessInitialState){
               context.read<GetAccessBloc>().add(GetDataFromStorageEvent());
+              return const Center(child: CircularProgressIndicator());
+            }
+            else if(state is GetAccessValidState){
               return const Center(child: CircularProgressIndicator());
             }
             else{

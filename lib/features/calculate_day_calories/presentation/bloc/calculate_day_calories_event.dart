@@ -8,6 +8,17 @@ abstract class CalculateDayCaloriesEvent extends Equatable {
 }
 
 // ignore: must_be_immutable
+class GetCalorieDataFromStorage extends CalculateDayCaloriesEvent{
+  String email;
+  GetCalorieDataFromStorage({
+    required this.email
+  });
+
+  @override
+  List<Object> get props => [email];
+}
+
+// ignore: must_be_immutable
 class SetCalorieData extends CalculateDayCaloriesEvent{
   CalorieData calorieData;
   SetCalorieData({
