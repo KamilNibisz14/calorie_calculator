@@ -52,7 +52,10 @@ class CalculateDayCaloriesPage extends StatelessWidget {
                 children: [
                   const Align(
                     alignment: Alignment.center,
-                    child: MealInDays(),
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 30),
+                      child: MealInDays(),
+                    ),
                   ),
                   const Align(
                     alignment: Alignment.bottomCenter,

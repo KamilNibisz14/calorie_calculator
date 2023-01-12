@@ -13,47 +13,64 @@ class AddMeal extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double iconSize = screenWidth / 15;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  context.read<CalculateDayCaloriesBloc>().add(CancelAddMealEvent());
-                  Navigator.pop(context);
-                },
-                child: Icon(
-                  Icons.cancel_rounded,
-                  color: Colors.redAccent,
-                  size: iconSize,
-                ),
-              ),
-              GestureDetector(
-                onTap: (){
-                  context.read<CalculateDayCaloriesBloc>().add(AddMealEvent());
-                  Navigator.pop(context);
-                },
-                child: Icon(
-                  Icons.add_circle,
-                  color: Colors.green,
-                  size: iconSize,
-                ),
-              ),
-            ],
-          ),
-        ),
-        Row(
+    return BlocBuilder<CalculateDayCaloriesBloc, CalculateDayCaloriesState>(
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(child: FillMacroelement(macroelement: Macroelement.protein,)),
-            Expanded(child: FillMacroelement(macroelement: Macroelement.fats,)),
-            Expanded(child: FillMacroelement(macroelement: Macroelement.carbohydrates,)),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      context
+                          .read<CalculateDayCaloriesBloc>()
+                          .add(CancelAddMealEvent());
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.cancel_rounded,
+                      color: Colors.redAccent,
+                      size: iconSize,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      context
+                          .read<CalculateDayCaloriesBloc>()
+                          .add(AddMealEvent());
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.add_circle,
+                      color: Colors.green,
+                      size: iconSize,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              children: [
+                Expanded(
+                    child: FillMacroelement(
+                  macroelement: Macroelement.protein,
+                )),
+                Expanded(
+                    child: FillMacroelement(
+                  macroelement: Macroelement.fats,
+                )),
+                Expanded(
+                    child: FillMacroelement(
+                  macroelement: Macroelement.carbohydrates,
+                )),
+              ],
+            ),
           ],
-        ),
-      ],
+        );
+      },
     );
   }
 }

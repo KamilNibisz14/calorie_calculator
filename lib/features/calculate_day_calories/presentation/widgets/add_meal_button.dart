@@ -30,6 +30,7 @@ class AddMealButton extends StatelessWidget {
     return GestureDetector(
       onTap:() => addMeal(context),
       child: Container(
+        margin: const EdgeInsets.only(bottom: 20),
         width: buttonWidth,
         height: buttonHeight,
         decoration: BoxDecoration(

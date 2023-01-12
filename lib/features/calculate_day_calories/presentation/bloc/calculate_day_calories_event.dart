@@ -18,6 +18,7 @@ class GetCalorieDataFromStorage extends CalculateDayCaloriesEvent{
   List<Object> get props => [email];
 }
 
+
 // ignore: must_be_immutable
 class SetCalorieData extends CalculateDayCaloriesEvent{
   CalorieData calorieData;

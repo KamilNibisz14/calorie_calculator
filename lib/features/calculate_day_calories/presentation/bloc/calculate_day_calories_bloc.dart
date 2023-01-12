@@ -4,6 +4,8 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../locator.dart';
 import '../../data/get_calorie_data_from_storage.dart';
+import '../../data/get_meals_from_storage.dart';
+import '../../data/save_meals_in_storage.dart';
 
 part 'calculate_day_calories_event.dart';
 part 'calculate_day_calories_state.dart';
@@ -12,6 +14,7 @@ class CalculateDayCaloriesBloc extends Bloc<CalculateDayCaloriesEvent, Calculate
   CalorieData _calorieData = CalorieData();
   CalorieData _caloriesThroughoutTheDay = CalorieData();
   List<CalorieData> _meals = [];
+  late String email;
 
   CalorieData _fillCalorieData = CalorieData();
   
@@ -30,8 +33,14 @@ class CalculateDayCaloriesBloc extends Bloc<CalculateDayCaloriesEvent, Calculate
   }
 
   _onGetCalorieDataFromStorage(GetCalorieDataFromStorage event, Emitter<CalculateDayCaloriesState> emit)async{
+    email = event.email;
     if(await  locator.get<GetCalorieData>().checkIfUserCalorieDataExist(event.email)){
       _calorieData = await locator.get<GetCalorieData>().getCalorieData(event.email);
+
+      if(await locator.get<GetMelasFromStorage>().checkIfUserDataExist(email)){
+        _meals = await locator.get<GetMelasFromStorage>().getMealsFromStorage(email);
+        caloculateMacroelements();
+      }
       emit(FillCalculateDayCaloriesState(calorieData: _calorieData, meals: _meals, caloriesThroughoutTheDay: _caloriesThroughoutTheDay));
     }else{
       emit(FailToGetDataFromStorage(calorieData: _calorieData, meals: _meals, caloriesThroughoutTheDay: _caloriesThroughoutTheDay));
@@ -54,6 +63,9 @@ class CalculateDayCaloriesBloc extends Bloc<CalculateDayCaloriesEvent, Calculate
       _meals.add(_fillCalorieData);
       _caloriesThroughoutTheDay.addValue(_fillCalorieData);
       _fillCalorieData = CalorieData();
+
+      locator.get<SetMealsInStorage>().setMealsInStorage(_meals, email);
+
       emit(FillCalculateDayCaloriesState(calorieData: _calorieData, meals: _meals, caloriesThroughoutTheDay: _caloriesThroughoutTheDay));
     }
   }
@@ -69,7 +81,14 @@ class CalculateDayCaloriesBloc extends Bloc<CalculateDayCaloriesEvent, Calculate
   _onRemoveMealEvent(RemoveMealEvent event, Emitter<CalculateDayCaloriesState> emit){
     _caloriesThroughoutTheDay.subtractionValue(_meals[event.index]);
     _meals.removeAt(event.index);
+    locator.get<SetMealsInStorage>().setMealsInStorage(_meals, email);
     emit(FillCalculateDayCaloriesState(calorieData: _calorieData, meals: _meals, caloriesThroughoutTheDay: _caloriesThroughoutTheDay));
+  }
+
+  void caloculateMacroelements(){
+    for(int i = 0; i < _meals.length; ++i){
+      _caloriesThroughoutTheDay.addValue(_meals[i]);
+    }
   }
 
 }
